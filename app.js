@@ -108,3 +108,54 @@ function rellenarDesplegable() {
         actualizarEstadisticas();
     });
  
+       document.getElementById("enlaceSeguimiento").addEventListener("click", (e) => {
+        e.preventDefault();
+        pintarTabla();
+        modal.classList.remove("oculto");   
+    });
+ 
+    document.getElementById("btnCerrar").addEventListener("click", () => {
+        modal.classList.add("oculto");      
+    });
+ 
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.add("oculto");
+        }
+    });
+
+    function nombreDeHabito(habitoId) {
+    const habito = habitos.find(h => h.id === habitoId);
+    if (habito) {
+        return habito.nombre;
+    }
+    return "(hábito eliminado)";
+}
+ 
+function pintarTabla() {
+    const cuerpo = document.getElementById("cuerpoTabla");
+    cuerpo.innerHTML = "";
+ 
+    if (registros.length === 0) {
+        cuerpo.innerHTML = `<tr><td colspan="5" class="vacio">Aún no hay registros.</td></tr>`;
+    }
+ 
+    for (const r of registros) {
+        const clase = r.cumplido ? "ok" : "ko";
+        const texto = r.cumplido ? "✓ Cumplido" : "✗ Fallado";
+ 
+        cuerpo.innerHTML += `
+            <tr class="fila-${clase}">
+                <td>${nombreDeHabito(r.habitoId)}</td>
+                <td>${r.fecha}</td>
+                <td>${r.observaciones || "—"}</td>
+                <td><span class="estado ${clase}">${texto}</span></td>
+                <td><button class="btn-cambiar" onclick="toggleCumplido(${r.id})">Cambiar</button></td>
+            </tr>`;
+    }
+ 
+    const cumplidos = registros.filter(r => r.cumplido).length;
+    const fallados = registros.length - cumplidos;
+    document.getElementById("resumenTabla").textContent =
+        `Resumen: ${cumplidos} cumplidos · ${fallados} fallados`;
+}

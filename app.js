@@ -32,3 +32,25 @@ function guardarTodo() {
     guardarCookie("habitos", habitos);
     guardarCookie("registros", registros);
 }
+
+formHabito.addEventListener("submit", (e) => {
+        e.preventDefault();
+ 
+        const nombre = document.getElementById("nombre").value.trim();
+        const descripcion = document.getElementById("descripcion").value.trim();
+        const categoria = document.getElementById("categoria").value;
+ 
+        if (nombre === "") {
+            document.getElementById("errorNombre").textContent = "Escribe un nombre para el hábito.";
+            return;
+        }
+        document.getElementById("errorNombre").textContent = "";
+ 
+        const habito = { id: Date.now(), nombre: nombre, descripcion: descripcion, categoria: categoria };
+        habitos.push(habito);
+ 
+        guardarTodo();
+        formHabito.reset();
+        rellenarDesplegable();      
+        actualizarEstadisticas();
+    });

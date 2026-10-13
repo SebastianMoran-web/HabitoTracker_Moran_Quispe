@@ -1,0 +1,60 @@
+.formularios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.tarjeta {
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 24px;
+}
+.tarjeta h2 { margin: 0 0 14px; font-size: 1.4rem; }
+ 
+label { display: block; font-weight: 600; margin: 14px 0 5px; }
+input[type="text"], input[type="date"], select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  color: inherit;
+  background: #f7f9f7;
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+}
+input:focus-visible, select:focus-visible, textarea:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--azafran);
+  outline-offset: 1px;
+}
+textarea { resize: vertical; }
+.check { display: flex; align-items: center; gap: 10px; font-weight: 500; }
+.check input { width: 20px; height: 20px; accent-color: var(--verde); }
+ 
+.error { color: var(--rojo); font-size: 0.9rem; margin: 5px 0 0; min-height: 0; }
+ 
+.btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--tinta);
+  background: var(--azafran);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(0.95); }
+ 
+.acciones { margin-top: 24px; text-align: right; }
+.btn-peligro {
+  font: inherit;
+  font-weight: 600;
+  color: var(--rojo);
+  background: transparent;
+  border: 1px solid var(--rojo);
+  border-radius: 6px;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+.btn-peligro:hover { background: var(--rojo-claro); }

@@ -58,3 +58,162 @@ textarea { resize: vertical; }
   cursor: pointer;
 }
 .btn-peligro:hover { background: var(--rojo-claro); }
+
+#menu {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: var(--tinta);
+  color: #fff;
+}
+.logo { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.01em; }
+.enlaces { display: flex; gap: 22px; }
+.enlaces a {
+  color: #cfdad6;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+.enlaces a:hover, .enlaces a:focus-visible {
+  color: #fff;
+  border-bottom-color: var(--azafran);
+  outline: none;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal.oculto { display: none; }
+ 
+.modal-caja {
+  width: 100%;
+  max-width: 760px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--papel);
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+.modal-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.modal-cabecera h2 { margin: 0; font-size: 1.5rem; }
+.cerrar {
+  font: inherit;
+  font-size: 1.1rem;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--linea);
+  background: #f7f9f7;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.cerrar:hover { background: var(--rojo-claro); color: var(--rojo); }
+ 
+.tabla-scroll { overflow: auto; border: 1px solid var(--linea); border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--linea); vertical-align: top; }
+th { background: #f1f4f1; font-weight: 600; position: sticky; top: 0; }
+tbody tr:last-child td { border-bottom: none; }
+td.vacio { text-align: center; color: var(--tinta-suave); padding: 28px; }
+ 
+.estado { font-weight: 700; white-space: nowrap; }
+.estado.ok { color: var(--verde); }
+.estado.ko { color: var(--rojo); }
+tr.fila-ok { background: var(--verde-claro); }
+tr.fila-ko { background: var(--rojo-claro); }
+ 
+.btn-cambiar {
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  background: var(--papel);
+  border: 1px solid var(--tinta);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-cambiar:hover { background: var(--azafran); }
+ 
+.resumen { margin: 14px 0 0; font-weight: 600; }
+
+@media (max-width: 720px) {
+  .formularios { grid-template-columns: 1fr; }
+  .panel-stats { grid-template-columns: 1fr; }
+  .stat { border-left: none; border-top: 1px solid var(--linea); }
+  .stat:first-child { border-top: none; }
+  #menu { padding: 12px 16px; }
+}
+
+.panel-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.stat {
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--linea);
+}
+.stat:first-child { border-left: none; }
+.stat-num { font-size: 3.2rem; font-weight: 800; line-height: 1; }
+.stat-txt { color: var(--tinta-suave); margin-top: 6px; }
+.stat-ok .stat-num { color: var(--verde); }
+.stat-ko .stat-num { color: var(--rojo); }
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 20px 56px;
+}
+
+:root {
+  --fondo: #eef1ee;
+  --papel: #ffffff;
+  --tinta: #14211f;
+  --tinta-suave: #5a6b67;
+  --linea: #d3dbd6;
+  --verde: #1e7a56;
+  --verde-claro: #dcf0e5;
+  --rojo: #b3382c;
+  --rojo-claro: #f7e0dd;
+  --azafran: #f2b632;
+  --radio: 10px;
+}
+ 
+* { box-sizing: border-box; }
+ 
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: "Figtree", system-ui, sans-serif;
+  line-height: 1.5;
+}
+ 
+h1, h2, .logo, .stat-num {
+  font-family: "Bricolage Grotesque", "Figtree", sans-serif;
+}

@@ -159,3 +159,39 @@ function pintarTabla() {
     document.getElementById("resumenTabla").textContent =
         `Resumen: ${cumplidos} cumplidos · ${fallados} fallados`;
 }
+
+function toggleCumplido(id) {
+    const registro = registros.find(r => r.id === id);
+    registro.cumplido = !registro.cumplido;
+ 
+    guardarTodo();
+    pintarTabla();
+    actualizarEstadisticas();
+}
+ 
+ 
+window.addEventListener("DOMContentLoaded", () => {
+    const formHabito = document.getElementById("formHabito");
+    const formRegistro = document.getElementById("formRegistro");
+    const modal = document.getElementById("modal");
+ 
+    document.getElementById("fecha").value = new Date().toISOString().split("T")[0];
+ 
+    rellenarDesplegable();
+    actualizarEstadisticas();})
+
+    function actualizarEstadisticas() {
+    const cumplidos = registros.filter(r => r.cumplido === true).length;
+    const fallados = registros.filter(r => r.cumplido === false).length;
+ 
+    document.getElementById("statHabitos").textContent = habitos.length;
+    document.getElementById("statCumplidos").textContent = cumplidos;
+    document.getElementById("statFallados").textContent = fallados;
+}
+     document.getElementById("btnBorrarTodo").addEventListener("click", () => {
+        if (confirm("¿Seguro que quieres borrar todos los hábitos y registros?")) {
+            borrarCookie("habitos");
+            borrarCookie("registros");
+            location.reload();
+        }
+    });

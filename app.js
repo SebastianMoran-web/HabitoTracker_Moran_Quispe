@@ -54,3 +54,57 @@ formHabito.addEventListener("submit", (e) => {
         rellenarDesplegable();      
         actualizarEstadisticas();
     });
+
+function rellenarDesplegable() {
+    const select = document.getElementById("selectHabito");
+    select.innerHTML = "";
+ 
+    if (habitos.length === 0) {
+        select.innerHTML = `<option value="">Primero crea un hábito</option>`;
+        return;
+    }
+ 
+    for (const h of habitos) {
+        select.innerHTML += `<option value="${h.id}">${h.nombre} (${h.categoria})</option>`;
+    }
+}
+
+ formRegistro.addEventListener("submit", (e) => {
+        e.preventDefault();
+ 
+        const habitoId = Number(document.getElementById("selectHabito").value);
+        const fecha = document.getElementById("fecha").value;
+        const observaciones = document.getElementById("observaciones").value.trim();
+        const cumplido = document.getElementById("cumplido").checked;
+ 
+        let valido = true;
+        document.getElementById("errorHabito").textContent = "";
+        document.getElementById("errorFecha").textContent = "";
+ 
+        if (habitoId === 0) {
+            document.getElementById("errorHabito").textContent = "Elige un hábito (créalo antes si no hay ninguno).";
+            valido = false;
+        }
+        if (fecha === "") {
+            document.getElementById("errorFecha").textContent = "Elige una fecha.";
+            valido = false;
+        }
+        if (!valido) {
+            return;
+        }
+ 
+        const registro = {
+            id: Date.now(),
+            habitoId: habitoId,
+            fecha: fecha,
+            observaciones: observaciones,
+            cumplido: cumplido
+        };
+        registros.push(registro);
+ 
+        guardarTodo();
+        document.getElementById("observaciones").value = "";
+        document.getElementById("cumplido").checked = false;
+        actualizarEstadisticas();
+    });
+ 
